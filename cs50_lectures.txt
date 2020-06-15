@@ -29,3 +29,11 @@ const int N = 3;
 This can be put on top of the program
 
 > clang -o average_array average_array.c -lcs50
+
+\0:  Null character at the string. It is always available at the end (check names.c file in week_2)
+
+
+int main(int argc, string argv[])
+
+argc : argument counter
+argv : argument vectors
