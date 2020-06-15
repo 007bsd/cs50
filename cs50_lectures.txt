@@ -1,0 +1,4 @@
+1) To make a file executable then run
+make filename (without the .c extension)
+
+2) Then run the executable file with ./filename
