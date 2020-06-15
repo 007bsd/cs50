@@ -15,7 +15,7 @@ int x = (expr) ? 5: 6
 {
 }
 
-2) 
+2)
 do {
 }
 while(expr)
@@ -24,8 +24,8 @@ while(expr)
 3) For loop
 
 
-> const is use in the varible to make sure the value is not changed
+> const is use in the variable to make sure the value is not changed
 const int N = 3;
 This can be put on top of the program
 
-
+> clang -o average_array average_array.c -lcs50
