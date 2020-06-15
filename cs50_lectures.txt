@@ -1,4 +1,31 @@
-1) To make a file executable then run
-make filename (without the .c extension)
 
-2) Then run the executable file with ./filename
+> Logical and && : x and y both are true
+> Logical OR || : x is or y true
+
+> ternianry operators:
+
+int x = (expr) ? 5: 6
+
+5 is true
+6 is false
+
+> Loops:
+
+1) while (expr)
+{
+}
+
+2) 
+do {
+}
+while(expr)
+
+
+3) For loop
+
+
+> const is use in the varible to make sure the value is not changed
+const int N = 3;
+This can be put on top of the program
+
+
