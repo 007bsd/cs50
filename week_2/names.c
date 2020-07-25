@@ -10,5 +10,5 @@ int main(void) {
 
   printf("The name valus is:%s\n", names[0]);
   printf("The character valus is:%c%c%c%i\n", names[0][0], names[0][1], names[0][2], names[0][3]);
-# the string always ends with null character or \0
+//the string always ends with null character or \0
 }

@@ -33,7 +33,14 @@ This can be put on top of the program
 \0:  Null character at the string. It is always available at the end (check names.c file in week_2)
 
 
+command line argument:
 int main(int argc, string argv[])
 
 argc : argument counter
 argv : argument vectors
+
+
+variable and Scope:
+1- Local variable and global variable
+
+Local variable: It keeps the copy of the variable
