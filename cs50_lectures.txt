@@ -167,3 +167,57 @@ string details
 }person;
 
 person above is the name of the structure
+
+#################Week 4
+
+Hexadecimal: 0 1 2 3 4 5 6 7 8 9 A B C D E F
+Decimal: 0 1 2 3 4 5 6 7 8 9
+
+8 binray digit: 8 bits : 2*0 -- 2*7 : 1 2 4 8 16 32 64 128
+
+FF in Decimal: 255 in decinal: 1 1 1 1 1 1 1 1 in binrary
+
+int is 4 bytes
+
+Address:
+& : to get out the adress of the variable
+%p: To print out that address 
+* : Go to the address. It undo the operation
+
+int *p : It is a pointer of the data type integer. It holds the address of the variable
+
+int n = 50;
+int *p = &n;
+
+
+typedef char* string;
+
+so char* 
+
+> string can not be compare with the itself as they hold different address like integer
+
+malloc: allocating new memory for string
+
+char *t = malloc(strlen(s)+1)
+
+The above is a data type of stdlib.h
+
+free: free is a function to deallocate the same memory used in the memory
+
+valgrind: It is a tool indentify the memory used 
+
+help50 valigrind ./copy
+
+swap
+
+void swap (int a , int b){
+
+int tmp =a;
+a = b;
+b = tmp;
+}
+
+
+
+
+
