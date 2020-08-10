@@ -181,7 +181,7 @@ int is 4 bytes
 
 Address:
 & : to get out the adress of the variable
-%p: To print out that address 
+%p: To print out that address
 * : Go to the address. It undo the operation
 
 int *p : It is a pointer of the data type integer. It holds the address of the variable
@@ -192,7 +192,7 @@ int *p = &n;
 
 typedef char* string;
 
-so char* 
+so char*
 
 > string can not be compare with the itself as they hold different address like integer
 
@@ -204,7 +204,7 @@ The above is a data type of stdlib.h
 
 free: free is a function to deallocate the same memory used in the memory
 
-valgrind: It is a tool indentify the memory used 
+valgrind: It is a tool indentify the memory used
 
 help50 valigrind ./copy
 
@@ -218,6 +218,143 @@ b = tmp;
 }
 
 
+#############################
+Hexadecimal:
+1111 : F
+0x0 : Hexadecimal
+0: Decimal
 
+1 16 256
 
+Pointers:
 
+data type: size in bytes
+int: 4
+char: 1
+float: 4
+double: 8
+long long: 8
+
+Pointers are nothing more than an address. This is where the variable lives
+It is value in the memory address. type describes the data located at that memory address
+
+always set the value as NULL.
+
+* : Deference operator used in Pointers
+
+int pc = 5;
+int *pt = &pc;
+
+Deferencing a variable is called with NULL pointers is result in Segmentation fault
+
+string : char *
+
+Dynamic memory Allocation:
+> Using pointers, we can dynamically allocated memory
+> The memory leaves in the HEAP
+malloc()
+
+int x; // stack memory
+int *px = malloc(sizeof(int))  // dynamically allocated memory
+
+int x - GetInt(); // stack memory
+float stack_array[x]; // array of floats in the stack
+
+float *heap_array = malloc(x * sizeof(float)); // array of floats on the heap
+
+// dynamically allocate the memory
+char *word = malloc(50 * (sizeof(char)));
+
+// free the memory
+
+free(word);
+Golden rule of the memory:
+> Every block of memory should be subsequently free()
+> Only memory that malloc() should be free()
+> Do not free() a block of memory more than once
+
+int m;
+int * a;
+int *b = malloc(sizeof(int));
+
+a = &m;
+a= b;
+m =10;
+*b = m +2; // b =12
+free(b)
+
+Call Stacks:
+
+int fact(int n){
+if (n ==1){
+return 1;
+}
+else
+{
+return n * fact(n-1);
+}
+}
+
+int main(void){
+printf("%i\n", fact(5));
+}
+
+File Pointers:
+
+FILE*
+
+stdio.h > file headers for FILE
+fopen(): opens a file and gives a file pointer to it
+
+FILE * ptr = fopen(<file name>, <operation>);
+FILE * ptr1 = fopen("file1.txt", "r");
+FILE * ptr2 = fopen("file2.txt", "w");
+FILE * ptr1 = fopen("file3.txt", "a");
+
+fclose(): Closes the file
+fclose(<file pointer>);
+fclose(ptr1);
+
+fgetc(): reads and returns the next character from the file pointed to
+char ch = fgetc(<file pointer>);
+char ch = fgetc(ptr1);
+
+char ch;
+while((ch = fgetc(ptr1)) != EOF)
+  printf("%c", ch);
+The above is same as that of cat.c in the linux os
+
+fputc(): Writes a single character
+fputc(<character>, <file pointer>);
+ fputc("A", ptr2);
+char ch;
+while((ch = fgetc(ptr)) != EOF)
+  fputc(ch, ptr2);
+Above command is same as the linux cp command. cp.c
+
+fread():
+Read all the contents of the file.
+fread(<buffer>, <size>, <qty>, <file pointer>);
+int arr[10];
+fread(arr, sizeof(int), 10, ptr);
+double * arr2 = malloc(sizeof(double) * 80);
+fread(arr2, sizeof(double), 80, ptr);
+char c;
+fread(&c, sizeof(char),1, ptr);
+
+fwrite():
+fwrite(<buffer>, <size>, <qty>, <filepointer>);
+int arr[10];
+fwrite(arr, sizeof(int), 10, ptr);
+double * arr2 = malloc(sizeof(double) * 80);
+fwrite(arr2, sizeof(double), 80, ptr);
+char c;
+fwrite(&c, sizeof(char),1, ptr);
+
+fgets(): Reads the full string
+fputs(): Writes the full string
+fprintf(): writes the formatted string to a file
+fseek(): allows to rewind and fast forward in a file
+ftell(): Tells you at what byte position you are at
+feof(): tells you whether you have read to the end of the file
+ferror(): Indicates whether an error has occurred in the file
