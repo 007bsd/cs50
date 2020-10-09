@@ -238,8 +238,13 @@ long long: 8
 Pointers are nothing more than an address. This is where the variable lives
 It is value in the memory address. type describes the data located at that memory address
 
-always set the value as NULL.
+int p;
+p = 5;
+int *pt ;
+pt = &p;
 
+> always set the value as NULL, if there is nothing to allocate
+pt = NULL;
 * : Deference operator used in Pointers
 
 int pc = 5;
@@ -249,7 +254,23 @@ Deferencing a variable is called with NULL pointers is result in Segmentation fa
 
 string : char *
 
+array:
+double arr[]
+&arr[i]: Is a pointer to double where the ith element lives
+
+
+&arr[i] : Pointer where ith element lives
+
+k = 5;
+int *pk ;
+*pk = 35;
+
+Then k becomes 35. So pointer helps in changing the caller function and as well as the calle function
+
 Dynamic memory Allocation:
+
+Stack memory and Heap memory
+
 > Using pointers, we can dynamically allocated memory
 > The memory leaves in the HEAP
 malloc()
@@ -266,6 +287,7 @@ float *heap_array = malloc(x * sizeof(float)); // array of floats on the heap
 char *word = malloc(50 * (sizeof(char)));
 
 // free the memory
+After allocating or dynamically allocating memory, free the memory
 
 free(word);
 Golden rule of the memory:
@@ -273,17 +295,21 @@ Golden rule of the memory:
 > Only memory that malloc() should be free()
 > Do not free() a block of memory more than once
 
-int m;
-int * a;
-int *b = malloc(sizeof(int));
+int m; // Just declaration of the variable which lives in the stack
+int * a;  // Just declaration of the pointer and lives in the stack
+int *b = malloc(sizeof(int));   // Pointing to address of the int
 
-a = &m;
-a= b;
+a = &m; // a points to m or get the address of the m
+a= b;  // a and b now points to the same address
 m =10;
-*b = m +2; // b =12
+*b = m +2; // b =12  . Deference the b. Go to the address of b where it lives and manipulate
+
 free(b)
 
+*a = 11 // This will result in a segmention fault as we have already free the memory of ""b"" above or where the b was pointing
+
 Call Stacks:
+Only one function can be an active frame
 
 int fact(int n){
 if (n ==1){
@@ -299,6 +325,8 @@ int main(void){
 printf("%i\n", fact(5));
 }
 
+main() -> printf() ->  fact() 5-1
+
 File Pointers:
 
 FILE*
@@ -307,19 +335,24 @@ stdio.h > file headers for FILE
 fopen(): opens a file and gives a file pointer to it
 
 FILE * ptr = fopen(<file name>, <operation>);
-FILE * ptr1 = fopen("file1.txt", "r");
-FILE * ptr2 = fopen("file2.txt", "w");
-FILE * ptr1 = fopen("file3.txt", "a");
+
+FILE * ptr1 = fopen("file1.txt", "r");  // read file
+FILE * ptr1 = fopen("file2.txt", "w"); // write  file
+FILE * ptr1 = fopen("file3.txt", "a"); // append file
 
 fclose(): Closes the file
+
 fclose(<file pointer>);
+
 fclose(ptr1);
 
 fgetc(): reads and returns the next character from the file pointed to
+FILE * ptr1 = fopen("file1.txt", "r");  // read file
 char ch = fgetc(<file pointer>);
 char ch = fgetc(ptr1);
 
 char ch;
+FILE * ptr1 = fopen("file1.txt", "r");  // read file
 while((ch = fgetc(ptr1)) != EOF)
   printf("%c", ch);
 The above is same as that of cat.c in the linux os
@@ -334,22 +367,33 @@ Above command is same as the linux cp command. cp.c
 
 fread():
 Read all the contents of the file.
+
 fread(<buffer>, <size>, <qty>, <file pointer>);
+buffer :  a pointer
+size : amount of the data
+
 int arr[10];
-fread(arr, sizeof(int), 10, ptr);
+fread(arr, sizeof(int), 10, ptr);  // the ptr ptr points to getting stored in arr
+
 double * arr2 = malloc(sizeof(double) * 80);
 fread(arr2, sizeof(double), 80, ptr);
+
+Only one character cllecting from the file ptr points to:
 char c;
 fread(&c, sizeof(char),1, ptr);
 
 fwrite():
-fwrite(<buffer>, <size>, <qty>, <filepointer>);
+
+fwrite(<buffer>, <size>, <qty>, <filepointer>);  // buffer to the file. Read from the buffer than write to the file ptr points to
 int arr[10];
 fwrite(arr, sizeof(int), 10, ptr);
+
 double * arr2 = malloc(sizeof(double) * 80);
 fwrite(arr2, sizeof(double), 80, ptr);
+
 char c;
 fwrite(&c, sizeof(char),1, ptr);
+
 
 fgets(): Reads the full string
 fputs(): Writes the full string
@@ -358,3 +402,224 @@ fseek(): allows to rewind and fast forward in a file
 ftell(): Tells you at what byte position you are at
 feof(): tells you whether you have read to the end of the file
 ferror(): Indicates whether an error has occurred in the file
+
+
+##############
+Run cs50 locally
+
+clang prog.c -lcs50 -o prog
+
+
+
+##### Data Strcutures ##### Lecture 5
+
+int main(void)
+{
+int *x;  // declaration of pointer x
+int *y; // declaration of pointer y
+
+x = malloc(sizeof(int)) // allocating the memory chunk for the pointer x
+
+*x = 42;  // Deferencing the pointer with the * and assigning a value. This is same as int x =42;
+*y = 43;  // this is buggy bcs *y is not declared
+
+if we change above bug by
+y = x;
+*y = 43;
+}
+
+
+Array :
+
+Running time of insertion of an array:
+
+O(n2)
+O(n log n)
+O(n)  : Insert array
+O(log n) : Search Array
+O(1)
+
+> any time you allocate memory using malloc, make sure to sure if returns is NULL or and stop the programm
+
+int *list = malloc(3*sizeof(int));
+
+if(list ==NULL){
+  return 1;
+}
+
+int *list1 = reaclloc(list, 4*sizeof(int))
+
+=> With realloc you do need to copy
+
+
+Structure:
+
+. : To access the properties of the structure
+* : Dereferencing the variables
+
+Linkedlist: A data structure which linked together back to back. It contains pointers also
+
+typdef struct{
+string name;
+string number;
+}person;
+
+// declare the struct node
+typdef struct node{
+int number;
+struct node *next; // the pointer pointing to next element
+}node;
+
+// assigning the value
+node *n = malloc(sizeof(node))
+(*n).number = 2; or n->number = 2;
+n->next = NULL;
+
+Always check the memory after allocating the memory. SO
+node *n = malloc(sizeof(node))
+if (n != NULL){
+n->number = 2;
+n->next = NULL;
+}
+
+list = n;
+
+node *tmp = list;
+
+while(tmp->NEXT != NULL){
+tmp = tmp->NEXT;
+}
+
+n->NEXT = list;
+list = n;
+
+=> Linked list gives dynamism
+
+Trees:
+
+typdef struct node{
+int number;
+struct node *left;
+struct node *right;
+}node;
+
+bool search (node *tree)
+{
+if (tree == NULL)
+{
+return false;
+}
+else if (50 < tree->number){
+return search(tree->left);
+}
+
+else if (50 > tree->number){
+return search(tree->right);
+}
+
+else (50 == tree->number){
+return true;
+}
+}
+
+
+Hash Table: Hash table is indexed into by using hash Functions
+Tries: Each of the nodes are Arrays
+Queues: FIFO
+Stacks: LIFO
+Dictionaries: keys and values
+
+
+Data Structure:
+>>Array:
+* Insertion is bad
+* Deletion is bad
+* Look up in an array is good
+* Relatively easy to sorting
+* Relatively small size wise
+* Stuck with fixed size, no flexibility
+
+Linked List:
+* Insertion is easy
+* Deletion is easy
+* Searching is not so easy
+* Look up is bad
+* Sorting is difficult
+
+Hash Table:
+* Insertion is easy
+* Deletion is easy
+* Look up is better than the Linkedlist
+* Sorting is bit difficult
+* Can run into gmut size.
+
+Tries:
+* Insertion is complex. Have dynamism
+* Deletion is easy
+* Look up is easy
+* Sorting is easy
+
+Singly Linked List:
+* It has node. Node contains two VALUE. One is VALUE( can be int, float, char etc.) and is a pointer to another node
+
+typedef struct slist {
+ VALUE val;
+ struct *slit next;
+}sllnode;
+
+Create Linked list:
+
+sllnode * create(VALUE val);
+
+Find in Single Linked List:
+bool find(sllnode* head, VALUE val);
+
+bool exits =  find(list, 6)
+
+Insertion:
+
+sllnode * insert( sllnode* node, VALUE val);
+>> First linked all the list before moving the list
+
+Deletion:
+
+void destroy( sllnode * head)
+If you have reached the null pointer
+Delete the rest of the list
+free the current node
+
+Hash Table:
+>> Hash table is used when you do not care about the sort
+>> It has two function. One is Hash Function and Another is one is the Array
+
+string hashtable[10];  // hash array
+int x = hash("john");  // trying to hash funtion. Once you run through it then it will give a place to the "john" in the hash table
+
+hashtable[x] = "john"  // insert
+
+int y = hash("paul")
+hashtable[x] = "paul"
+
+unsigned int hash(char * str)
+{
+int sum = 0;
+for (int j=0; str[j] != '\0'; j++)
+{
+sum +=sum[j]
+
+}
+return sum % HASH_MAX
+}
+
+>> Collision : Collision occurs when the hash function generates the same data
+
+Tries:
+>> It stores the data in key, value pair
+>> It combines array, structures and pointers together
+>> Follow the roadmap
+>> Build the data structure from root to the leafs
+
+typedef struct _trie{
+char university[20]
+struct _trie* paths[20]
+}trie;
